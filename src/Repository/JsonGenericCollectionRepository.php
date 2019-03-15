@@ -1,9 +1,9 @@
 <?php
 
-namespace d0niek\Generic\Repository;
+namespace EdmondsCommerce\Generic\Repository;
 
-use d0niek\Generic\Model\GenericCollection;
-use d0niek\Generic\Model\Collections\VectorGenericCollection;
+use EdmondsCommerce\Generic\Model\GenericCollection;
+use EdmondsCommerce\Generic\Model\Collections\VectorGenericCollection;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>

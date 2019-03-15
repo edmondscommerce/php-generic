@@ -1,8 +1,8 @@
 <?php
 
-namespace d0niek\Generic\Service;
+namespace EdmondsCommerce\Generic\Service;
 
-use d0niek\Generic\Model\GenericCollection;
+use EdmondsCommerce\Generic\Model\GenericCollection;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -12,7 +12,7 @@ interface CollectionGeneratorInterface
     /**
      * Generate generic collection
      *
-     * @param \d0niek\Generic\Model\GenericCollection $genericCollection
+     * @param \EdmondsCommerce\Generic\Model\GenericCollection $genericCollection
      * @param string $collectionType
      * @param bool $saveCollection
      *

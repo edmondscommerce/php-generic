@@ -1,6 +1,6 @@
 <?php
 
-namespace d0niek\Generic\Model;
+namespace EdmondsCommerce\Generic\Model;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -66,7 +66,7 @@ class GenericCollection implements \JsonSerializable
     /**
      * Compare object with other GenericCollection
      *
-     * @param \d0niek\Generic\Model\GenericCollection $genericCollection
+     * @param \EdmondsCommerce\Generic\Model\GenericCollection $genericCollection
      *
      * @return int
      */

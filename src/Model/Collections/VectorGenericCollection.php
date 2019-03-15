@@ -3,11 +3,11 @@
  * Generic Collection \Ds\Vector<GenericCollection>
  */
 
-namespace d0niek\Generic\Model\Collections;
+namespace EdmondsCommerce\Generic\Model\Collections;
 
 use Ds\Vector;
-use d0niek\Generic\Collections\VectorGeneric;
-use d0niek\Generic\Model\GenericCollection;
+use EdmondsCommerce\Generic\Collections\VectorGeneric;
+use EdmondsCommerce\Generic\Model\GenericCollection;
 
 final class VectorGenericCollection extends VectorGeneric
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace d0niek\Tests\Collections;
+namespace EdmondsCommerce\Tests\Collections;
 
-use d0niek\Generic\Example\Collections\ArrayInt;
-use d0niek\Generic\Collections\ArrayGeneric;
+use EdmondsCommerce\Generic\Example\Collections\ArrayInt;
+use EdmondsCommerce\Generic\Collections\ArrayGeneric;
 use PHPUnit\Framework\TestCase;
 
 /**

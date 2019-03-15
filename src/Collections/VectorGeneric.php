@@ -1,6 +1,6 @@
 <?php
 
-namespace d0niek\Generic\Collections;
+namespace EdmondsCommerce\Generic\Collections;
 
 use Ds\Vector;
 

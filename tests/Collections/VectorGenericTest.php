@@ -1,9 +1,9 @@
 <?php
 
-namespace d0niek\Tests\Collections;
+namespace EdmondsCommerce\Tests\Collections;
 
-use d0niek\Generic\Example\Collections\VectorInt;
-use d0niek\Generic\Collections\VectorGeneric;
+use EdmondsCommerce\Generic\Example\Collections\VectorInt;
+use EdmondsCommerce\Generic\Collections\VectorGeneric;
 use PHPUnit\Framework\TestCase;
 
 /**

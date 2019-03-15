@@ -1,11 +1,11 @@
 <?php
 
-namespace d0niek\Generic\Command;
+namespace EdmondsCommerce\Generic\Command;
 
-use d0niek\Generic\Collections\GenericType;
-use d0niek\Generic\Example\User;
-use d0niek\Generic\Model\GenericCollection;
-use d0niek\Generic\Service\CollectionGeneratorInterface;
+use EdmondsCommerce\Generic\Collections\GenericType;
+use EdmondsCommerce\Generic\Example\User;
+use EdmondsCommerce\Generic\Model\GenericCollection;
+use EdmondsCommerce\Generic\Service\CollectionGeneratorInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ExamplesGeneratorCommand extends Command
 {
     /**
-    * @var \d0niek\Generic\Service\CollectionGeneratorInterface
+    * @var \EdmondsCommerce\Generic\Service\CollectionGeneratorInterface
     */
     private $collectionGenerator;
 
@@ -37,10 +37,10 @@ class ExamplesGeneratorCommand extends Command
     /**
      * @var string
      */
-    private $namespace = 'd0niek\\GenericCollection\\Example\\Collections';
+    private $namespace = 'EdmondsCommerce\\GenericCollection\\Example\\Collections';
 
     /**
-     * @param \d0niek\Generic\Service\CollectionGeneratorInterface $collectionGenerator
+     * @param \EdmondsCommerce\Generic\Service\CollectionGeneratorInterface $collectionGenerator
      */
     public function __construct(CollectionGeneratorInterface $collectionGenerator)
     {

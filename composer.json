@@ -1,5 +1,5 @@
 {
-  "name": "d0niek/php-generic",
+  "name": "edmondscommerce/php-generic",
   "description": "Generator for generic array/vector.",
   "type": "library",
   "keywords": [
@@ -10,16 +10,20 @@
     "php71",
     "generator"
   ],
-  "homepage": "https://github.com/d0niek/php-generic",
+  "homepage": "https://github.com/edmondscommerce/php-generic",
   "license": "MIT",
   "authors": [
     {
       "name": "Damian Glinkowski",
       "email": "damianglinkowski@gmail.com"
+    },
+    {
+      "name": "Edmonds Commerce",
+      "email": "info@edmondscommerce.co.uk"
     }
   ],
   "support": {
-    "issues": "https://github.com/d0niek/php-generic/issues"
+    "issues": "https://github.com/edmondscommerce/php-generic/issues"
   },
   "require": {
     "php": "^7.1",
@@ -39,12 +43,12 @@
   ],
   "autoload": {
     "psr-4": {
-      "d0niek\\Generic\\": "src/"
+      "edmondscommerce\\Generic\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "d0niek\\Tests\\": "tests/"
+      "edmondscommerce\\Tests\\": "tests/"
     }
   },
   "config": {
