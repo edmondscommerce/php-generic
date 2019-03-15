@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Generic\Collections;
+namespace EdmondsCommerce\Generic\Collections;
 
 use Ds\Vector;
 
@@ -10,7 +10,7 @@ use Ds\Vector;
 abstract class VectorGeneric implements \ArrayAccess, \Countable, \Iterator, \JsonSerializable, \Serializable
 {
     /**
-     * @var \Ds\Vector
+     * @var Vector
      */
     protected $data;
 
@@ -117,7 +117,7 @@ abstract class VectorGeneric implements \ArrayAccess, \Countable, \Iterator, \Js
     }
 
     /**
-     * @param callable $callback
+     * @param callable   $callback
      * @param mixed|null $initial
      *
      * @return mixed
@@ -212,7 +212,7 @@ abstract class VectorGeneric implements \ArrayAccess, \Countable, \Iterator, \Js
     public function __debugInfo(): array
     {
         return [
-            'data' => $this->data
+            'data' => $this->data,
         ];
     }
 }

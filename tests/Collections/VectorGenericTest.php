@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Tests\Collections;
+namespace EdmondsCommerce\Generic\Tests\Collections;
 
-use d0niek\Generic\Example\Collections\VectorInt;
-use d0niek\Generic\Collections\VectorGeneric;
+use EdmondsCommerce\Generic\Tests\Example\Collections\VectorInt;
+use EdmondsCommerce\Generic\Collections\VectorGeneric;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,46 +13,29 @@ final class VectorGenericTest extends TestCase
 {
     public function testIsInstanceOfArrayGenericCollection(): void
     {
-        $this->assertInstanceOf(VectorGeneric::class, new VectorInt());
+        self::assertInstanceOf(VectorGeneric::class, new VectorInt());
     }
 
     public function testCanBeCreatedWithOneValue(): void
     {
         $vector = new VectorInt(1);
 
-        $this->assertSame(1, $vector->count());
+        self::assertSame(1, $vector->count());
     }
 
     public function testCanBeCreatedWithMultiValues(): void
     {
         $vector = new VectorInt(1, 2, 45);
 
-        $this->assertSame(3, $vector->count());
+        self::assertSame(3, $vector->count());
     }
 
-    public function testCanBeCreatedWithNumberValues(): void
+    public function testCanAccessToGenericVectorAsToNormalArray(): void
     {
-        $vector = new VectorInt('3', 2.4, -45);
+        $vector = new VectorInt(3, 4);
 
-        $this->assertSame(3, $vector->count());
-    }
-
-    public function testCannotBeCreatedWithNotNumberValue(): void
-    {
-        $this->expectException(\TypeError::class);
-        $this->expectExceptionMessageRegExp(
-            '/Argument 3 passed to .+__construct\(\) must be of the type integer, string given/'
-        );
-
-        new VectorInt(3, 4.5, 'string');
-    }
-
-    public function testCanAccesToGenericVectorAsToNormalArray(): void
-    {
-        $vector = new VectorInt(3, '4');
-
-        $this->assertSame(4, $vector[1]);
-        $this->assertSame(3, $vector[0]);
+        self::assertSame(4, $vector[1]);
+        self::assertSame(3, $vector[0]);
     }
 
     public function testAllocatesEnoughMemoryForRequiredCapacity(): void
@@ -61,12 +44,12 @@ final class VectorGenericTest extends TestCase
 
         $vector->allocate(30);
 
-        $this->assertSame(30, $vector->capacity());
+        self::assertSame(30, $vector->capacity());
     }
 
     public function testUpdatesAllValuesByApplyingCallbackFunctionToEachValue(): void
     {
-        $array = [2, 4, 5];
+        $array  = [2, 4, 5];
         $vector = new VectorInt(...$array);
 
         $vector->apply(function (int $value): int {
@@ -74,7 +57,7 @@ final class VectorGenericTest extends TestCase
         });
 
         foreach ($array as $key => $value) {
-            $this->assertSame($value * 2, $vector[$key]);
+            self::assertSame($value * 2, $vector[$key]);
         }
     }
 
@@ -85,16 +68,16 @@ final class VectorGenericTest extends TestCase
         $countBeforeClear = $vector->count();
         $vector->clear();
 
-        $this->assertGreaterThan($vector->count(), $countBeforeClear);
-        $this->assertSame(0, $vector->count());
+        self::assertGreaterThan($vector->count(), $countBeforeClear);
+        self::assertSame(0, $vector->count());
     }
 
     public function testDeterminesIfVectorContainsGivenValues(): void
     {
         $vector = new VectorInt(3, 2, 56);
 
-        $this->assertTrue($vector->contains(2, 3));
-        $this->assertFalse($vector->contains(-4));
+        self::assertTrue($vector->contains(2, 3));
+        self::assertFalse($vector->contains(-4));
     }
 
     public function testReturnShallowCopyOfVector(): void
@@ -103,20 +86,20 @@ final class VectorGenericTest extends TestCase
 
         $vectorCopy = $vector->copy();
 
-        $this->assertInstanceOf(get_class($vector), $vector);
-        $this->assertSame($vector->count(), $vectorCopy->count());
+        self::assertInstanceOf(get_class($vector), $vector);
+        self::assertSame($vector->count(), $vectorCopy->count());
 
         $vectorCopy->push(12);
 
-        $this->assertNotSame($vector->count(), $vectorCopy->count());
+        self::assertNotSame($vector->count(), $vectorCopy->count());
     }
 
     public function testReturnsNumberOfValuesInCollection(): void
     {
         $vector = new VectorInt(3, 4, 12);
 
-        $this->assertSame(3, $vector->count());
-        $this->assertSame(count($vector), $vector->count());
+        self::assertSame(3, $vector->count());
+        self::assertSame(count($vector), $vector->count());
     }
 
     public function testCreatesNewVectorUsingCallableToDetermineWhichValuesToInclude(): void
@@ -127,32 +110,32 @@ final class VectorGenericTest extends TestCase
             return $value % 2 === 0;
         });
 
-        $this->assertInstanceOf(get_class($vector), $filterVector);
-        $this->assertFalse($filterVector->contains(3, 5));
-        $this->assertTrue($filterVector->contains(2, 4, 6));
+        self::assertInstanceOf(get_class($vector), $filterVector);
+        self::assertFalse($filterVector->contains(3, 5));
+        self::assertTrue($filterVector->contains(2, 4, 6));
     }
 
     public function testAttemptsToFindValuesIndex(): void
     {
         $vector = new VectorInt(5, 3, 67);
 
-        $this->assertSame(1, $vector->find(3));
-        $this->assertSame(-1, $vector->find(1));
+        self::assertSame(1, $vector->find(3));
+        self::assertSame(-1, $vector->find(1));
     }
 
     public function testReturnsFirstValueInVector(): void
     {
         $vector = new VectorInt(3, 2, 1);
 
-        $this->assertSame(3, $vector->first());
+        self::assertSame(3, $vector->first());
     }
 
     public function testReturnsValueAtGivenIndex(): void
     {
         $vector = new VectorInt(3, 45, -3);
 
-        $this->assertSame(-3, $vector->get(2));
-        $this->assertSame($vector[2], $vector->get(2));
+        self::assertSame(-3, $vector->get(2));
+        self::assertSame($vector[2], $vector->get(2));
     }
 
     public function testCallToNotexistingIndex(): void
@@ -172,8 +155,8 @@ final class VectorGenericTest extends TestCase
         $vector->insert(1, 2);
         $vector->insert(0, 45, 32);
 
-        $this->assertCount(4, $vector);
-        $this->assertSame(32, $vector[1]);
+        self::assertCount(4, $vector);
+        self::assertSame(32, $vector[1]);
     }
 
     public function testInsertToNotExistingIndex(): void
@@ -185,45 +168,42 @@ final class VectorGenericTest extends TestCase
         $vector->insert(5, 34);
     }
 
-    public function testInsertNotNumberValue(): void
+    public function testFilterCanTotallyEmpty(): void
     {
-        $this->expectException(\TypeError::class);
-        $this->expectExceptionMessageRegExp(
-            '/Argument 2 passed to .+insert\(\) must be of the type integer, string given/'
-        );
-
-        $vector = new VectorInt(4, 5);
-
-        $vector->insert(1, 'string');
+        $vector = new VectorInt(1, 2, 3);
+        $actual = $vector->filter(function () {
+            return false;
+        });
+        self::assertSame([], $actual->toArray());
     }
 
     public function testVectorIsEmpty(): void
     {
         $vector = new VectorInt();
 
-        $this->assertTrue($vector->isEmpty());
+        self::assertTrue($vector->isEmpty());
     }
 
     public function testVectorIsNotEmpty(): void
     {
         $vector = new VectorInt(1, 2);
 
-        $this->assertFalse($vector->isEmpty());
+        self::assertFalse($vector->isEmpty());
     }
 
     public function testJoinsAllValuesTogetherAsString(): void
     {
         $vector = new VectorInt(3, 4, 7);
 
-        $this->assertSame('3,4,7', $vector->join(','));
-        $this->assertSame('347', $vector->join());
+        self::assertSame('3,4,7', $vector->join(','));
+        self::assertSame('347', $vector->join());
     }
 
     public function testReturnsLastValue(): void
     {
         $vector = new VectorInt(2, 4, 6);
 
-        $this->assertSame(6, $vector->last());
+        self::assertSame(6, $vector->last());
     }
 
     public function testReturnsResultOfApplyingCallbackToEachValue(): void
@@ -234,9 +214,9 @@ final class VectorGenericTest extends TestCase
             return $value + 2;
         });
 
-        $this->assertInstanceOf(get_class($vector), $vectorMap);
+        self::assertInstanceOf(get_class($vector), $vectorMap);
         foreach ($vectorMap as $key => $value) {
-            $this->assertSame($value, $vector[$key] + 2);
+            self::assertSame($value, $vector[$key] + 2);
         }
     }
 
@@ -246,8 +226,8 @@ final class VectorGenericTest extends TestCase
 
         $vectorMerge = $vector->merge(2, 4);
 
-        $this->assertInstanceOf(get_class($vector), $vectorMerge);
-        $this->assertSame(4, $vectorMerge->last());
+        self::assertInstanceOf(get_class($vector), $vectorMerge);
+        self::assertSame(4, $vectorMerge->last());
     }
 
     public function testRemovesAndReturnsLastValue(): void
@@ -256,8 +236,8 @@ final class VectorGenericTest extends TestCase
 
         $value = $vector->pop();
 
-        $this->assertSame(2, $vector->last());
-        $this->assertSame(37, $value);
+        self::assertSame(2, $vector->last());
+        self::assertSame(37, $value);
     }
 
     public function testRemoveLastElementFromEmptyVector(): void
@@ -276,24 +256,12 @@ final class VectorGenericTest extends TestCase
         $vector->push(3);
         $vector->push(1, 56);
 
-        $this->assertSame(56, $vector->last());
+        self::assertSame(56, $vector->last());
 
         $vector[] = 3;
 
-        $this->assertSame(3, $vector->last());
-        $this->assertCount(6, $vector);
-    }
-
-    public function testAddsNotNumberValueToCollection(): void
-    {
-        $this->expectException(\TypeError::class);
-        $this->expectExceptionMessageRegExp(
-            '/Argument 2 passed to .+push\(\) must be of the type integer, string given/'
-        );
-
-        $vector = new VectorInt(4, 5);
-
-        $vector->push(1, 'string');
+        self::assertSame(3, $vector->last());
+        self::assertCount(6, $vector);
     }
 
     public function testReducesVectorToSingleValueUsingCallbackFunction(): void
@@ -302,9 +270,10 @@ final class VectorGenericTest extends TestCase
 
         $value = $vector->reduce(function (int $carry, int $value): int {
             return $carry * $value;
-        }, 5);
+        },
+            5);
 
-        $this->assertSame(30, $value);
+        self::assertSame(30, $value);
     }
 
     public function testRemovesAndReturnsValueByIndex(): void
@@ -313,8 +282,8 @@ final class VectorGenericTest extends TestCase
 
         $value = $vector->remove(1);
 
-        $this->assertCount(2, $vector);
-        $this->assertSame(4, $value);
+        self::assertCount(2, $vector);
+        self::assertSame(4, $value);
     }
 
     public function testRemoveElementByNotExistingIndex(): void
@@ -332,7 +301,7 @@ final class VectorGenericTest extends TestCase
 
         $vector->reverse();
 
-        $this->assertSame(1, $vector->last());
+        self::assertSame(1, $vector->last());
     }
 
     public function testReturnsReversedCopy(): void
@@ -341,8 +310,8 @@ final class VectorGenericTest extends TestCase
 
         $reversedVector = $vector->reversed();
 
-        $this->assertInstanceOf(get_class($vector), $reversedVector);
-        $this->assertSame($vector->first(), $reversedVector->last());
+        self::assertInstanceOf(get_class($vector), $reversedVector);
+        self::assertSame($vector->first(), $reversedVector->last());
     }
 
     public function testRotatesVectorByGivenNumberOfRotation(): void
@@ -351,8 +320,8 @@ final class VectorGenericTest extends TestCase
 
         $vector->rotate(2);
 
-        $this->assertSame(34, $vector->last());
-        $this->assertSame(45, $vector->first());
+        self::assertSame(34, $vector->last());
+        self::assertSame(45, $vector->first());
     }
 
     public function testUpdatesValueAtGivenIndex(): void
@@ -361,11 +330,11 @@ final class VectorGenericTest extends TestCase
 
         $vector->set(2, 43);
 
-        $this->assertSame(43, $vector[2]);
+        self::assertSame(43, $vector[2]);
 
         $vector[1] = 0;
 
-        $this->assertSame(0, $vector[1]);
+        self::assertSame(0, $vector[1]);
     }
 
     public function testUpdateValueAtNotExistingIndex(): void
@@ -382,8 +351,8 @@ final class VectorGenericTest extends TestCase
 
         $value = $vector->shift();
 
-        $this->assertSame(34, $value);
-        $this->assertCount(2, $vector);
+        self::assertSame(34, $value);
+        self::assertCount(2, $vector);
     }
 
     public function testRemoveFirstElementFromEmptyVector(): void
@@ -401,9 +370,9 @@ final class VectorGenericTest extends TestCase
 
         $sliceVector = $vector->slice(2, 3);
 
-        $this->assertInstanceOf(get_class($vector), $sliceVector);
-        $this->assertCount(3, $sliceVector);
-        $this->assertSame($sliceVector->last(), $vector[4]);
+        self::assertInstanceOf(get_class($vector), $sliceVector);
+        self::assertCount(3, $sliceVector);
+        self::assertSame($sliceVector->last(), $vector[4]);
     }
 
     public function testSortsVectorInPlace(): void
@@ -412,8 +381,8 @@ final class VectorGenericTest extends TestCase
 
         $vector->sort();
 
-        $this->assertSame(4, $vector->first());
-        $this->assertSame(58, $vector->last());
+        self::assertSame(4, $vector->first());
+        self::assertSame(58, $vector->last());
     }
 
     public function testReturnsSortedCopy(): void
@@ -424,14 +393,14 @@ final class VectorGenericTest extends TestCase
             return $b <=> $a;
         });
 
-        $this->assertSame(58, $sortedVector->first());
+        self::assertSame(58, $sortedVector->first());
     }
 
     public function testReturnsSumOfAllValuesInVector(): void
     {
-        $vector = new VectorInt(45, 5.7, 12);
+        $vector = new VectorInt(45, 5, 12);
 
-        $this->assertSame(62, $vector->sum());
+        self::assertSame(62, $vector->sum());
     }
 
     public function testAddsValuesToFrontOfVector(): void
@@ -440,7 +409,7 @@ final class VectorGenericTest extends TestCase
 
         $vector->unshift(4, 6);
 
-        $this->assertCount(4, $vector);
-        $this->assertSame(4, $vector->first());
+        self::assertCount(4, $vector);
+        self::assertSame(4, $vector->first());
     }
 }

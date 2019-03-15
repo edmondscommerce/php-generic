@@ -12,3 +12,5 @@ report/*
 !report/.gitkeep
 src/Example/Collections/*
 !src/Example/Collections/.gitkeep
+var
+.idea

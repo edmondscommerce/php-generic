@@ -1,14 +1,14 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Generic\Command;
+namespace EdmondsCommerce\Generic\Command;
 
-use d0niek\Generic\Collections\GenericType;
-use d0niek\Generic\Model\GenericCollection;
-use d0niek\Generic\Service\CollectionGeneratorInterface;
+use EdmondsCommerce\Generic\Collections\GenericType;
+use EdmondsCommerce\Generic\Model\GenericCollection;
+use EdmondsCommerce\Generic\Service\CollectionGeneratorInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -16,13 +16,14 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class VectorGeneratorCommand extends Command
 {
+    use ArgStringTrait;
     /**
-     * @var \d0niek\Generic\Service\CollectionGeneratorInterface
+     * @var \EdmondsCommerce\Generic\Service\CollectionGeneratorInterface
      */
     private $collectionGenerator;
 
     /**
-     * @param \d0niek\Generic\Service\CollectionGeneratorInterface $collectionGenerator
+     * @param \EdmondsCommerce\Generic\Service\CollectionGeneratorInterface $collectionGenerator
      */
     public function __construct(CollectionGeneratorInterface $collectionGenerator)
     {
@@ -36,25 +37,25 @@ class VectorGeneratorCommand extends Command
     protected function configure(): void
     {
         $this->setName('generate:vector')
-            ->setDescription('Generate generic vector - \Ds\Vector<type>()')
-            ->addArgument(
-                'type',
-                InputArgument::REQUIRED,
-                "Type of generic vector. It can by bool, int, float, string, array \n" .
-                "or full class namespace (remember to use \\\\ to separate names)."
-            )
-            ->addArgument(
-                'namespace',
-                InputArgument::REQUIRED,
-                "Namespace of new generic vector."
-            )
-            ->addOption(
-                'save',
-                's',
-                InputOption::VALUE_OPTIONAL,
-                'Save generated vector to generated-collections.json file.',
-                true
-            );
+             ->setDescription('Generate generic vector - \Ds\Vector<type>()')
+             ->addArgument(
+                 'type',
+                 InputArgument::REQUIRED,
+                 "Type of generic vector. It can by bool, int, float, string, array \n" .
+                 "or full class namespace (remember to use \\\\ to separate names)."
+             )
+             ->addArgument(
+                 'namespace',
+                 InputArgument::REQUIRED,
+                 "Namespace of new generic vector."
+             )
+             ->addOption(
+                 'save',
+                 's',
+                 InputOption::VALUE_OPTIONAL,
+                 'Save generated vector to generated-collections.json file.',
+                 false
+             );
     }
 
     /**
@@ -62,16 +63,17 @@ class VectorGeneratorCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $type = $input->getArgument('type');
-        $namespace = $input->getArgument('namespace');
+        $type              = ltrim($this->getArgString($input, 'type'), '\\');
+        $namespace         = $this->getArgString($input, 'namespace');
         $genericCollection = new GenericCollection($type, $namespace);
-        $save = $input->getOption('save');
+        $save              = $input->getOption('save');
 
-        if ($save !== true && $save !== 'true' && $save !== 'false') {
+        if (!in_array($save, [true, false, 'true', 'false'], true)) {
             throw new \InvalidArgumentException('Possible values for save option are true or false');
         }
-
-        $save = $save === 'false' ? false : true;
+        if (!is_bool($save)) {
+            $save = $save === 'false' ? false : true;
+        }
 
         $this->collectionGenerator->generate($genericCollection, GenericType::VECTOR_TYPE, $save);
 

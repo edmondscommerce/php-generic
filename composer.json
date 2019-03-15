@@ -1,51 +1,56 @@
 {
-    "name": "d0niek/php-generic",
-    "description": "Generator for generic array/vector.",
-    "type": "library",
-    "keywords": [
-        "generic",
-        "php",
-        "array",
-        "vector",
-        "php71",
-        "generator"
-    ],
-    "homepage": "https://github.com/d0niek/php-generic",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Damian Glinkowski",
-            "email": "damianglinkowski@gmail.com"
-        }
-    ],
-    "support": {
-        "issues": "https://github.com/d0niek/php-generic/issues"
+  "name": "edmondscommerce/php-generic",
+  "description": "Generator for generic array/vector.",
+  "type": "library",
+  "keywords": [
+    "generic",
+    "php",
+    "array",
+    "vector",
+    "php71",
+    "generator"
+  ],
+  "homepage": "https://github.com/edmondscommerce/php-generic",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Damian Glinkowski",
+      "email": "damianglinkowski@gmail.com"
     },
-    "require": {
-        "php": "^7.1",
-        "symfony/console": "^3.2|^4.2",
-        "php-ds/php-ds": "^1.1"
-    },
-    "require-dev": {
-        "edmondscommerce/phpqa": "~2.0.11"
-    },
-    "suggest": {
-        "ext-ds": "*"
-    },
-    "bin": [
-        "bin/generic"
-    ],
-    "autoload": {
-        "psr-4": {
-            "d0niek\\Generic\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "d0niek\\Tests\\": "tests/"
-        }
-    },
-    "config": {
-        "bin-dir": "bin"
+    {
+      "name": "Edmonds Commerce",
+      "email": "info@edmondscommerce.co.uk"
     }
+  ],
+  "support": {
+    "issues": "https://github.com/edmondscommerce/php-generic/issues"
+  },
+  "require": {
+    "php": "^7.1",
+    "symfony/console": "^3.2|^4.2",
+    "ext-ds": "*",
+    "ext-json": "*",
+    "edmondscommerce/typesafe-functions": "^0.1.2",
+    "php-ds/php-ds": "^1.2"
+  },
+  "require-dev": {
+    "edmondscommerce/phpqa": "~2.0.11",
+    "phpstan/phpstan-phpunit": "^0.11.0"
+  },
+  "bin": [
+    "bin/generic"
+  ],
+  "autoload": {
+    "psr-4": {
+      "EdmondsCommerce\\Generic\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "EdmondsCommerce\\Generic\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "bin-dir": "bin"
+  }
 }

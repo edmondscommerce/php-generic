@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Generic\Collections;
+namespace EdmondsCommerce\Generic\Collections;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>

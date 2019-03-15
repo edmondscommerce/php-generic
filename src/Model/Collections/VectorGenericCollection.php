@@ -1,18 +1,18 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Generic Collection \Ds\Vector<GenericCollection>
  */
 
-namespace d0niek\Generic\Model\Collections;
+namespace EdmondsCommerce\Generic\Model\Collections;
 
 use Ds\Vector;
-use d0niek\Generic\Collections\VectorGeneric;
-use d0niek\Generic\Model\GenericCollection;
+use EdmondsCommerce\Generic\Collections\VectorGeneric;
+use EdmondsCommerce\Generic\Model\GenericCollection;
 
 final class VectorGenericCollection extends VectorGeneric
 {
     /**
-     * @param GenericCollection[] $data
+     * @param GenericCollection ...$data
      */
     public function __construct(GenericCollection ...$data)
     {
@@ -20,7 +20,7 @@ final class VectorGenericCollection extends VectorGeneric
     }
 
     /**
-     * @param GenericCollection[] $values
+     * @param GenericCollection ...$values
      *
      * @return bool
      */
@@ -35,6 +35,7 @@ final class VectorGenericCollection extends VectorGeneric
     public function copy(): VectorGenericCollection
     {
         $data = $this->data->copy();
+
         return new VectorGenericCollection(...$data->toArray());
     }
 
@@ -47,13 +48,14 @@ final class VectorGenericCollection extends VectorGeneric
     }
 
     /**
-     * @param callable|null $callback
+     * @param callable $callback
      *
      * @return VectorGenericCollection|null
      */
-    public function filter(?callable $callback = null): ?VectorGenericCollection
+    public function filter(callable $callback): ?VectorGenericCollection
     {
         $data = $this->data->filter($callback);
+
         return is_null($data) ?
             null :
             new VectorGenericCollection(...$data->toArray());
@@ -67,6 +69,7 @@ final class VectorGenericCollection extends VectorGeneric
     public function find(GenericCollection $value): int
     {
         $index = $this->data->find($value);
+
         return $index !== false ?
             $index :
             -1;
@@ -91,8 +94,8 @@ final class VectorGenericCollection extends VectorGeneric
     }
 
     /**
-     * @param int $index
-     * @param GenericCollection[] $values
+     * @param int               $index
+     * @param GenericCollection ...$values
      */
     public function insert(int $index, GenericCollection ...$values): void
     {
@@ -108,13 +111,14 @@ final class VectorGenericCollection extends VectorGeneric
     }
 
     /**
-     * @param GenericCollection[] $values
+     * @param GenericCollection ...$values
      *
      * @return VectorGenericCollection
      */
     public function merge(GenericCollection ...$values): VectorGenericCollection
     {
         $data = $this->data->merge($values);
+
         return new VectorGenericCollection(...$data->toArray());
     }
 
@@ -126,6 +130,7 @@ final class VectorGenericCollection extends VectorGeneric
     public function map(callable $callback): VectorGenericCollection
     {
         $data = $this->data->map($callback);
+
         return new VectorGenericCollection(...$data->toArray());
     }
 
@@ -140,11 +145,14 @@ final class VectorGenericCollection extends VectorGeneric
     }
 
     /**
-     * @param int $offset
-     * @param GenericCollection $value
+     * @param int|null                $offset
+     * @param GenericCollection|mixed $value
      */
     public function offsetSet($offset, $value): void
     {
+        if (false === $value instanceof GenericCollection) {
+            throw new \InvalidArgumentException('$value must be an instance of GenericCollection');
+        }
         is_null($offset) ?
             $this->data->push($value) :
             $this->data->set($offset, $value);
@@ -159,7 +167,7 @@ final class VectorGenericCollection extends VectorGeneric
     }
 
     /**
-     * @param GenericCollection[] $values
+     * @param GenericCollection ...$values
      */
     public function push(GenericCollection ...$values): void
     {
@@ -182,11 +190,12 @@ final class VectorGenericCollection extends VectorGeneric
     public function reversed(): VectorGenericCollection
     {
         $data = $this->data->reversed();
+
         return new VectorGenericCollection(...$data->toArray());
     }
 
     /**
-     * @param int $index
+     * @param int               $index
      * @param GenericCollection $value
      */
     public function set(int $index, GenericCollection $value): void
@@ -203,7 +212,7 @@ final class VectorGenericCollection extends VectorGeneric
     }
 
     /**
-     * @param int $index
+     * @param int      $index
      * @param int|null $length
      *
      * @return VectorGenericCollection
@@ -211,6 +220,7 @@ final class VectorGenericCollection extends VectorGeneric
     public function slice(int $index, ?int $length = null): VectorGenericCollection
     {
         $data = $this->data->slice($index, $length);
+
         return new VectorGenericCollection(...$data->toArray());
     }
 
@@ -229,7 +239,7 @@ final class VectorGenericCollection extends VectorGeneric
     }
 
     /**
-     * @param GenericCollection[] $values
+     * @param GenericCollection ...$values
      */
     public function unshift(GenericCollection ...$values): void
     {

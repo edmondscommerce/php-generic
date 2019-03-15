@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Tests\Collections;
+namespace EdmondsCommerce\Generic\Tests\Collections;
 
-use d0niek\Generic\Example\Collections\ArrayInt;
-use d0niek\Generic\Collections\ArrayGeneric;
+use EdmondsCommerce\Generic\Tests\Example\Collections\ArrayInt;
+use EdmondsCommerce\Generic\Collections\ArrayGeneric;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,46 +13,29 @@ final class ArrayGenericTest extends TestCase
 {
     public function testIsInstanceOfArrayGenericCollection(): void
     {
-        $this->assertInstanceOf(ArrayGeneric::class, new ArrayInt());
+        self::assertInstanceOf(ArrayGeneric::class, new ArrayInt());
     }
 
     public function testCanBeCreatedWithOneValue(): void
     {
         $array = new ArrayInt(1);
 
-        $this->assertCount(1, $array);
+        self::assertCount(1, $array);
     }
 
     public function testCanBeCreatedWithMultiValues(): void
     {
         $array = new ArrayInt(1, 2, 45);
 
-        $this->assertCount(3, $array);
-    }
-
-    public function testCanBeCreatedWithNumberValues(): void
-    {
-        $array = new ArrayInt('3', 2.4, -45);
-
-        $this->assertCount(3, $array);
-    }
-
-    public function testCannotBeCreatedWithNotNumberValue(): void
-    {
-        $this->expectException(\TypeError::class);
-        $this->expectExceptionMessageRegExp(
-            '/Argument 3 passed to .+__construct\(\) must be of the type integer, string given/'
-        );
-
-        new ArrayInt(3, 4.5, 'string');
+        self::assertCount(3, $array);
     }
 
     public function testCanAccesToGenericArrayAsToNormalArray(): void
     {
-        $array = new ArrayInt(3, '4');
+        $array = new ArrayInt(3, 4);
 
-        $this->assertSame(4, $array[1]);
-        $this->assertSame(3, $array[0]);
+        self::assertSame(4, $array[1]);
+        self::assertSame(3, $array[0]);
     }
 
     public function testCanAddNewElement(): void
@@ -61,18 +44,18 @@ final class ArrayGenericTest extends TestCase
 
         $array[] = 7;
 
-        $this->assertSame(7, $array[2]);
+        self::assertSame(7, $array[2]);
     }
 
     public function testCanAddNewElementWithKey(): void
     {
         $array = new ArrayInt(4, 3);
 
-        $array[5] = 34;
+        $array[5]     = 34;
         $array['key'] = -4;
 
-        $this->assertSame(34, $array[5]);
-        $this->assertSame(-4, $array['key']);
+        self::assertSame(34, $array[5]);
+        self::assertSame(-4, $array['key']);
     }
 
     public function testCannotAddNewElementWithNotNumberValue(): void
@@ -87,16 +70,16 @@ final class ArrayGenericTest extends TestCase
 
     public function testCanCheckIfKeyExists(): void
     {
-        $array = new ArrayInt(3, 5);
+        $object = new ArrayInt(3, 5);
 
-        $this->assertFalse(isset($array[5]));
+        self::assertFalse(isset($object[5]));
     }
 
     public function testCanCountElement(): void
     {
         $array = new ArrayInt(4, 3, -2);
 
-        $this->assertEquals(3, count($array));
+        self::assertEquals(3, count($array));
     }
 
     public function testCanIterateInLoop(): void
@@ -104,22 +87,22 @@ final class ArrayGenericTest extends TestCase
         $array = new ArrayInt(3, 5, 12);
 
         foreach ($array as $key => $value) {
-            $this->assertSame($array[$key], $value);
+            self::assertSame($array[$key], $value);
         }
     }
 
     public function testCanBeSerialize(): void
     {
-        $array = [1, 4, 5];
+        $array    = [1, 4, 5];
         $arrayInt = new ArrayInt(...$array);
 
-        $this->assertContains(serialize($array), serialize($arrayInt));
+        self::assertContains(serialize($array), serialize($arrayInt));
     }
 
     public function testCanBeTransformetToArray(): void
     {
-        $array = new ArrayInt(34, 1);
-
-        $this->assertTrue(is_array($array->toArray()));
+        $array  = new ArrayInt(34, 1);
+        $result = $array->toArray();
+        self::assertNotEmpty($result);
     }
 }

@@ -1,8 +1,8 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Generic\Service;
+namespace EdmondsCommerce\Generic\Service;
 
-use d0niek\Generic\Model\GenericCollection;
+use EdmondsCommerce\Generic\Model\GenericCollection;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -17,7 +17,7 @@ class CollectionRender implements CollectionRenderInterface
     /**
      * @param string $rootPath
      */
-    public function __construct($rootPath)
+    public function __construct(string $rootPath)
     {
         $this->rootPath = $rootPath;
     }
@@ -34,7 +34,7 @@ class CollectionRender implements CollectionRenderInterface
 
         ob_start();
         include($template);
-        $result = "<?php\n" . ob_get_clean();
+        $result = "<?php declare(strict_types=1);\n" . ob_get_clean();
 
         return $result;
     }

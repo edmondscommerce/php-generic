@@ -1,3 +1,9 @@
+# This is a Fork
+
+Please see original: https://github.com/d0niek/php-generic
+
+-------
+
 # Prepare for future with php-generic
 
 According to this [article](https://www.sitepoint.com/creating-strictly-typed-arrays-collections-php/)

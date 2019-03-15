@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Generic\Service;
+namespace EdmondsCommerce\Generic\Service;
 
-use d0niek\Generic\Collections\GenericType;
-use d0niek\Generic\Model\GenericCollection;
-use d0niek\Generic\Repository\GenericCollectionRepositoryInterface;
+use EdmondsCommerce\Generic\Collections\GenericType;
+use EdmondsCommerce\Generic\Model\GenericCollection;
+use EdmondsCommerce\Generic\Repository\GenericCollectionRepositoryInterface;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -22,33 +22,45 @@ class CollectionGenerator implements CollectionGeneratorInterface
     private const GENERIC_TYPE = [GenericType::ARRAY_TYPE, GenericType::VECTOR_TYPE];
 
     /**
-     * @var \d0niek\Generic\Service\CollectionRenderInterface
+     * @var \EdmondsCommerce\Generic\Service\CollectionRenderInterface
      */
     private $collectionRender;
 
     /**
-     * @var \d0niek\Generic\Service\CollectionWriterInterface
+     * @var \EdmondsCommerce\Generic\Service\CollectionWriterInterface
      */
     private $collectionWriter;
 
     /**
-     * @var \d0niek\Generic\Repository\GenericCollectionRepositoryInterface $genericCollectionRepository
+     * @var \EdmondsCommerce\Generic\Repository\GenericCollectionRepositoryInterface $genericCollectionRepository
      */
     private $genericCollectionRepository;
 
     /**
-     * @param \d0niek\Generic\Service\CollectionRenderInterface $collectionRender
-     * @param \d0niek\Generic\Service\CollectionWriterInterface $collectionWriter
-     * @param \d0niek\Generic\Repository\GenericCollectionRepositoryInterface $genericCollectionRepository
+     * @param \EdmondsCommerce\Generic\Service\CollectionRenderInterface               $collectionRender
+     * @param \EdmondsCommerce\Generic\Service\CollectionWriterInterface               $collectionWriter
+     * @param \EdmondsCommerce\Generic\Repository\GenericCollectionRepositoryInterface $genericCollectionRepository
      */
     public function __construct(
         CollectionRenderInterface $collectionRender,
         CollectionWriterInterface $collectionWriter,
         GenericCollectionRepositoryInterface $genericCollectionRepository
     ) {
-        $this->collectionRender = $collectionRender;
-        $this->collectionWriter = $collectionWriter;
+        $this->collectionRender            = $collectionRender;
+        $this->collectionWriter            = $collectionWriter;
         $this->genericCollectionRepository = $genericCollectionRepository;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function regenerate(): void
+    {
+        $genericCollestions = $this->genericCollectionRepository->findAll();
+        foreach ($genericCollestions as $genericCollestion) {
+            $collectionType = str_replace(ucfirst($genericCollestion->getType()), '', $genericCollestion->getClass());
+            $this->generate($genericCollestion, $collectionType, false);
+        }
     }
 
     /**
@@ -59,11 +71,12 @@ class CollectionGenerator implements CollectionGeneratorInterface
         string $collectionType,
         bool $saveCollection
     ): void {
-        if (!in_array($collectionType, self::GENERIC_TYPE)) {
-            throw new \InvalidArgumentException('Unknown generic colletion type "' . $collectionType . '"');
+        if (!\ts\arrayContains($collectionType, self::GENERIC_TYPE)) {
+            throw new \InvalidArgumentException('Unknown generic collection type "' . $collectionType . '"');
         }
 
-        if (!in_array($genericCollection->getType(), self::PRIMITIVE_TYPE) && $genericCollection->getClass() === '') {
+        if (!\ts\arrayContains($genericCollection->getType(), self::PRIMITIVE_TYPE)
+            && $genericCollection->getClass() === '') {
             $this->updateGenericCollectionType($genericCollection);
         }
 
@@ -79,17 +92,23 @@ class CollectionGenerator implements CollectionGeneratorInterface
     }
 
     /**
-     * @param \d0niek\Generic\Model\GenericCollection $genericCollection
+     * @param \EdmondsCommerce\Generic\Model\GenericCollection $genericCollection
      */
     private function updateGenericCollectionType(GenericCollection $genericCollection): void
     {
-        if (!class_exists($genericCollection->getType())) {
+        if (false === (
+                class_exists('\\' . $genericCollection->getType())
+                ||
+                interface_exists('\\' . $genericCollection->getType())
+            )
+        ) {
             echo 'Warning! Class "', $genericCollection->getType(), '" does not exists.', "\n";
         }
 
         $namespaceArray = explode('\\', $genericCollection->getType());
         if (!isset($namespaceArray[1])) {
             $genericCollection->setType('\\' . $genericCollection->getType());
+
             return;
         }
 
@@ -98,33 +117,22 @@ class CollectionGenerator implements CollectionGeneratorInterface
     }
 
     /**
-     * @param \d0niek\Generic\Model\GenericCollection $genericCollection
-     * @param string $collectionType
+     * @param \EdmondsCommerce\Generic\Model\GenericCollection $genericCollection
+     * @param string                                           $collectionType
      *
      * @throws \ErrorException
      */
     private function generateCollection(GenericCollection $genericCollection, string $collectionType): void
     {
         $renderedCollecion = $this->collectionRender->render($genericCollection, $collectionType);
-        $saveResult = $this->collectionWriter->write($genericCollection, $renderedCollecion);
+        $saveResult        = $this->collectionWriter->write($genericCollection, $renderedCollecion);
 
         if ($saveResult === true) {
             echo 'New generic collection ', $collectionType, '<', $genericCollection->getType(), "> saved.\n";
+
             return;
         }
 
         throw new \ErrorException('Something went wrong during saving collection!');
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function regenerate(): void
-    {
-        $genericCollestions = $this->genericCollectionRepository->findAll();
-        foreach ($genericCollestions as $genericCollestion) {
-            $collectionType = str_replace(ucfirst($genericCollestion->getType()), '', $genericCollestion->getClass());
-            $this->generate($genericCollestion, $collectionType, false);
-        }
     }
 }

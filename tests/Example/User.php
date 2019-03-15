@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Generic\Example;
+namespace EdmondsCommerce\Generic\Tests\Example;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -16,8 +16,6 @@ class User
      * @var string
      */
     private $name;
-
-    #region Getters & Setters
 
     /**
      * @return int
@@ -38,10 +36,8 @@ class User
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
-
-    #endregion Getters & Setters
 }

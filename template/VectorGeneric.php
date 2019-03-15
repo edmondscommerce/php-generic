@@ -5,13 +5,13 @@
 namespace <?= $genericCollection->getNamespace() ?>;
 
 use Ds\Vector;
-use d0niek\Generic\Collections\VectorGeneric;
+use EdmondsCommerce\Generic\Collections\VectorGeneric;
 <?= $genericCollection->getUse() !== '' ? 'use ' . $genericCollection->getUse() . ";\n" : '' ?>
 
 final class <?= $genericCollection->getClass() ?> extends VectorGeneric
 {
     /**
-     * @param <?= $genericCollection->getType() ?>[] $data
+     * @param <?= $genericCollection->getType() ?> ...$data
      */
     public function __construct(<?= $genericCollection->getType() ?> ...$data)
     {
@@ -19,7 +19,7 @@ final class <?= $genericCollection->getClass() ?> extends VectorGeneric
     }
 
     /**
-     * @param <?= $genericCollection->getType() ?>[] $values
+     * @param <?= $genericCollection->getType() ?> ...$values
      *
      * @return bool
      */
@@ -46,16 +46,13 @@ final class <?= $genericCollection->getClass() ?> extends VectorGeneric
     }
 
     /**
-     * @param callable|null $callback
+     * @param callable $callback
      *
-     * @return <?= $genericCollection->getClass() ?>|null
+     * @return <?= $genericCollection->getClass() ?>
      */
-    public function filter(?callable $callback = null): ?<?= $genericCollection->getClass(), "\n" ?>
+    public function filter(callable $callback): <?= $genericCollection->getClass(), "\n" ?>
     {
-        $data = $this->data->filter($callback);
-        return is_null($data) ?
-            null :
-            new <?= $genericCollection->getClass() ?>(...$data->toArray());
+        return new self($this->data->filter($callback)->toArray());
     }
 
     /**
@@ -91,7 +88,7 @@ final class <?= $genericCollection->getClass() ?> extends VectorGeneric
 
     /**
      * @param int $index
-     * @param <?= $genericCollection->getType() ?>[] $values
+     * @param <?= $genericCollection->getType() ?> ...$values
      */
     public function insert(int $index, <?= $genericCollection->getType() ?> ...$values): void
     {
@@ -107,7 +104,7 @@ final class <?= $genericCollection->getClass() ?> extends VectorGeneric
     }
 
     /**
-     * @param <?= $genericCollection->getType() ?>[] $values
+     * @param <?= $genericCollection->getType() ?> ...$values
      *
      * @return <?= $genericCollection->getClass(), "\n" ?>
      */
@@ -139,11 +136,32 @@ final class <?= $genericCollection->getClass() ?> extends VectorGeneric
     }
 
     /**
-     * @param int $offset
-     * @param <?= $genericCollection->getType() ?> $value
+     * @param int|null $offset
+     * @param <?= $genericCollection->getType() ?>|mixed $value
      */
     public function offsetSet($offset, $value): void
     {
+        <?php switch($genericCollection->getType()){
+            case 'int':
+            case 'string':
+            case 'float':
+            case 'bool':
+            case 'array':
+                ?>
+            if (false === is_<?= $genericCollection->getType()?>($value)) {
+                throw new \InvalidArgumentException('$value must be of the type: <?= $genericCollection->getType() ?>');
+            }
+            <?php
+                break;
+
+            default:
+                ?>
+            if (false === ($value instanceof <?= $genericCollection->getType() ?>)) {
+                throw new \InvalidArgumentException('$value must be instance of <?= $genericCollection->getType() ?>');
+            }
+            <?php
+        }
+        ?>
         is_null($offset) ?
             $this->data->push($value) :
             $this->data->set($offset, $value);
@@ -158,7 +176,7 @@ final class <?= $genericCollection->getClass() ?> extends VectorGeneric
     }
 
     /**
-     * @param <?= $genericCollection->getType() ?>[] $values
+     * @param <?= $genericCollection->getType() ?> ...$values
      */
     public function push(<?= $genericCollection->getType() ?> ...$values): void
     {
@@ -228,7 +246,7 @@ final class <?= $genericCollection->getClass() ?> extends VectorGeneric
     }
 
     /**
-     * @param <?= $genericCollection->getType() ?>[] $values
+     * @param <?= $genericCollection->getType() ?> ...$values
      */
     public function unshift(<?= $genericCollection->getType() ?> ...$values): void
     {

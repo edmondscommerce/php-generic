@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Generic\Repository;
+namespace EdmondsCommerce\Generic\Repository;
 
-use d0niek\Generic\Model\GenericCollection;
-use d0niek\Generic\Model\Collections\VectorGenericCollection;
+use EdmondsCommerce\Generic\Model\GenericCollection;
+use EdmondsCommerce\Generic\Model\Collections\VectorGenericCollection;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -13,14 +13,14 @@ interface GenericCollectionRepositoryInterface
     /**
      * Save generic collection
      *
-     * @param \d0niek\Generic\Model\GenericCollection $genericCollection
+     * @param \EdmondsCommerce\Generic\Model\GenericCollection $genericCollection
      */
     public function save(GenericCollection $genericCollection): void;
 
     /**
      * Find all generic collections
      *
-     * @return \d0niek\Generic\Model\Collections\VectorGenericCollection
+     * @return \EdmondsCommerce\Generic\Model\Collections\VectorGenericCollection
      */
     public function findAll(): VectorGenericCollection;
 }

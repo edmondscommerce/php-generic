@@ -1,9 +1,9 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Generic\Service;
+namespace EdmondsCommerce\Generic\Service;
 
 use Composer\Autoload\ClassLoader;
-use d0niek\Generic\Model\GenericCollection;
+use EdmondsCommerce\Generic\Model\GenericCollection;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -28,7 +28,7 @@ class CollectionWriter implements CollectionWriterInterface
      */
     public function write(GenericCollection $genericCollection, string $renderedCollecion): bool
     {
-        $path = $this->getPathToNamespace($genericCollection->getNamespace() . '\\');
+        $path     = $this->getPathToNamespace($genericCollection->getNamespace() . '\\');
         $fileName = $path . $genericCollection->getClass() . '.php';
 
         $result = file_put_contents($fileName, $renderedCollecion);
@@ -58,7 +58,7 @@ class CollectionWriter implements CollectionWriterInterface
     }
 
     /**
-     * @param array $prefixes
+     * @param array  $prefixes
      * @param string $namespace
      *
      * @return string
@@ -66,9 +66,10 @@ class CollectionWriter implements CollectionWriterInterface
     private function getPathFromPrefix(array $prefixes, string $namespace): string
     {
         foreach ($prefixes as $composerNamespace => $path) {
-            $strpos = strpos($namespace, $composerNamespace);
-            if ($strpos !== false) {
+            $strpos = \strpos($namespace, $composerNamespace);
+            if (0 === $strpos) {
                 $extendPath = $this->extendComposerPath($path[0], $namespace, $composerNamespace);
+
                 return $extendPath;
             }
         }
@@ -82,7 +83,7 @@ class CollectionWriter implements CollectionWriterInterface
      * @param string $composerNamespace
      *
      * @return string
-     * @throws /InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     private function extendComposerPath(string $path, string $namespace, string $composerNamespace): string
     {
@@ -91,7 +92,7 @@ class CollectionWriter implements CollectionWriterInterface
         }
 
         $extendNamespace = str_replace($composerNamespace, '', $namespace);
-        $extendPath = $path . '/' . str_replace('\\', '/', $extendNamespace);
+        $extendPath      = $path . '/' . str_replace('\\', '/', $extendNamespace);
 
         if (!file_exists($extendPath)) {
             throw new \InvalidArgumentException(

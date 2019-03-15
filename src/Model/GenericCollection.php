@@ -1,6 +1,6 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace d0niek\Generic\Model;
+namespace EdmondsCommerce\Generic\Model;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
@@ -35,16 +35,16 @@ class GenericCollection implements \JsonSerializable
      */
     public function __construct(string $type, string $namespace, string $class = '', string $use = '')
     {
-        $this->type = str_replace('/', '\\', $type);
+        $this->type      = str_replace('/', '\\', $type);
         $this->namespace = str_replace('/', '\\', $namespace);
-        $this->class = str_replace('/', '\\', $class);
-        $this->use = str_replace('/', '\\', $use);
+        $this->class     = str_replace('/', '\\', $class);
+        $this->use       = str_replace('/', '\\', $use);
     }
 
     /**
      * @inheritDoc
      */
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }
@@ -55,18 +55,19 @@ class GenericCollection implements \JsonSerializable
     public function toArray(): array
     {
         $array = [
-            'type' => $this->type,
+            'type'      => $this->type,
             'namespace' => $this->namespace,
-            'class' => $this->class,
-            'use' => $this->use,
+            'class'     => $this->class,
+            'use'       => $this->use,
         ];
+
         return $array;
     }
 
     /**
      * Compare object with other GenericCollection
      *
-     * @param \d0niek\Generic\Model\GenericCollection $genericCollection
+     * @param \EdmondsCommerce\Generic\Model\GenericCollection $genericCollection
      *
      * @return int
      */
