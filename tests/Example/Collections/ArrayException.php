@@ -65,7 +65,7 @@ final class ArrayException extends ArrayGeneric
     * @param \Exception $item
     * @param mixed $key
     */
-    public function add(\Exception $item, $key=null): void
+    public function add(\Exception $item, $key = null): void
     {
         $this->offsetSet($key, $item);
     }

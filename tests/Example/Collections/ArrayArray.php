@@ -45,7 +45,7 @@ final class ArrayArray extends ArrayGeneric
     {
         if (false === is_array($value)) {
             throw new \InvalidArgumentException(
-                '$value is ' . $value.' but must be of the type: array'
+                '$value is ' . $value . ' but must be of the type: array'
             );
         }
                 null === $offset ?
@@ -65,7 +65,7 @@ final class ArrayArray extends ArrayGeneric
     * @param array $item
     * @param mixed $key
     */
-    public function add(array $item, $key=null): void
+    public function add(array $item, $key = null): void
     {
         $this->offsetSet($key, $item);
     }

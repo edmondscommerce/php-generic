@@ -45,7 +45,7 @@ final class ArrayInt extends ArrayGeneric
     {
         if (false === is_int($value)) {
             throw new \InvalidArgumentException(
-                '$value is ' . $value.' but must be of the type: int'
+                '$value is ' . $value . ' but must be of the type: int'
             );
         }
                 null === $offset ?
@@ -65,7 +65,7 @@ final class ArrayInt extends ArrayGeneric
     * @param int $item
     * @param mixed $key
     */
-    public function add(int $item, $key=null): void
+    public function add(int $item, $key = null): void
     {
         $this->offsetSet($key, $item);
     }

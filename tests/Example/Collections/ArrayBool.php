@@ -45,7 +45,7 @@ final class ArrayBool extends ArrayGeneric
     {
         if (false === is_bool($value)) {
             throw new \InvalidArgumentException(
-                '$value is ' . $value.' but must be of the type: bool'
+                '$value is ' . $value . ' but must be of the type: bool'
             );
         }
                 null === $offset ?
@@ -65,7 +65,7 @@ final class ArrayBool extends ArrayGeneric
     * @param bool $item
     * @param mixed $key
     */
-    public function add(bool $item, $key=null): void
+    public function add(bool $item, $key = null): void
     {
         $this->offsetSet($key, $item);
     }

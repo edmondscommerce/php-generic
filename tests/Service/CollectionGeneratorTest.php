@@ -93,6 +93,5 @@ class CollectionGeneratorTest extends TestCase
         ];
         $actual   = glob('*.php');
         self::assertSame($expected, $actual);
-
     }
 }

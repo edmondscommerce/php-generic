@@ -19,5 +19,4 @@ trait ArgStringTrait
 
         return $var;
     }
-
 }

@@ -45,7 +45,7 @@ final class ArrayFloat extends ArrayGeneric
     {
         if (false === is_float($value)) {
             throw new \InvalidArgumentException(
-                '$value is ' . $value.' but must be of the type: float'
+                '$value is ' . $value . ' but must be of the type: float'
             );
         }
                 null === $offset ?
@@ -65,7 +65,7 @@ final class ArrayFloat extends ArrayGeneric
     * @param float $item
     * @param mixed $key
     */
-    public function add(float $item, $key=null): void
+    public function add(float $item, $key = null): void
     {
         $this->offsetSet($key, $item);
     }

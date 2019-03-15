@@ -142,11 +142,11 @@ final class VectorInt extends VectorGeneric
      */
     public function offsetSet($offset, $value): void
     {
-                    if (false === is_int($value)) {
-                throw new \InvalidArgumentException(
-                    '$value is ' . $value.' but must be of the type: int'
-                );
-            }
+        if (false === is_int($value)) {
+            throw new \InvalidArgumentException(
+                '$value is ' . $value . ' but must be of the type: int'
+            );
+        }
                     is_null($offset) ?
             $this->data->push($value) :
             $this->data->set($offset, $value);

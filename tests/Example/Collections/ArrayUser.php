@@ -66,7 +66,7 @@ final class ArrayUser extends ArrayGeneric
     * @param User $item
     * @param mixed $key
     */
-    public function add(User $item, $key=null): void
+    public function add(User $item, $key = null): void
     {
         $this->offsetSet($key, $item);
     }
