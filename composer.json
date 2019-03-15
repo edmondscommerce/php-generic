@@ -23,13 +23,11 @@
     },
     "require": {
         "php": "^7.1",
-        "symfony/console": "^3.2|^4.2"
+        "symfony/console": "^3.2|^4.2",
+        "php-ds/php-ds": "^1.1"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "^2.8",
-        "phpmd/phpmd": "^2.6",
-        "phpunit/phpunit": "^6.1",
-        "php-ds/php-ds": "^1.1"
+        "edmondscommerce/phpqa": "~2.0.11"
     },
     "suggest": {
         "ext-ds": "*"
