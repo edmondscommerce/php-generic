@@ -7,7 +7,8 @@ use EdmondsCommerce\Generic\Collections\VectorGeneric;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @author Damian Glinkowski <damianglinkowski@gmail.com>
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 final class VectorGenericTest extends TestCase
 {

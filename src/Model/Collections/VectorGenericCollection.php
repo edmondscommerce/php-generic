@@ -1,14 +1,13 @@
 <?php declare(strict_types=1);
-/**
- * Generic Collection \Ds\Vector<GenericCollection>
- */
-
 namespace EdmondsCommerce\Generic\Model\Collections;
 
 use Ds\Vector;
 use EdmondsCommerce\Generic\Collections\VectorGeneric;
 use EdmondsCommerce\Generic\Model\GenericCollection;
 
+/**
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 final class VectorGenericCollection extends VectorGeneric
 {
     /**

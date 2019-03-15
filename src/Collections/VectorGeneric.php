@@ -6,6 +6,7 @@ use Ds\Vector;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 abstract class VectorGeneric implements \ArrayAccess, \Countable, \Iterator, \JsonSerializable, \Serializable
 {

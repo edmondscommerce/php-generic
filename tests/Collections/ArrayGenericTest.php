@@ -7,7 +7,8 @@ use EdmondsCommerce\Generic\Collections\ArrayGeneric;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @author Damian Glinkowski <damianglinkowski@gmail.com>
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.TooManyMethods)
  */
 final class ArrayGenericTest extends TestCase
 {

@@ -7,7 +7,9 @@ namespace <?= $genericCollection->getNamespace() ?>;
 use Ds\Vector;
 use EdmondsCommerce\Generic\Collections\VectorGeneric;
 <?= $genericCollection->getUse() !== '' ? 'use ' . $genericCollection->getUse() . ";\n" : '' ?>
-
+/**
+* @SuppressWarnings(PHPMD.TooManyPublicMethods)
+*/
 final class <?= $genericCollection->getClass() ?> extends VectorGeneric
 {
     /**
@@ -79,7 +81,8 @@ final class <?= $genericCollection->getClass() ?> extends VectorGeneric
     /**
      * @param int $index
      *
-     * @return <?= $genericCollection->getType(), "\n" ?>
+     * @return <?= $genericCollection->getType(), "\n" ?><?php
+     if ('bool'===$genericCollection->getType()) echo'     * @SuppressWarnings(PHPMD.BooleanGetMethodName)',"\n";?>
      */
     public function get(int $index): <?= $genericCollection->getType(), "\n" ?>
     {

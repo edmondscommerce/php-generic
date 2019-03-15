@@ -7,7 +7,9 @@ namespace EdmondsCommerce\Generic\Tests\Example\Collections;
 
 use Ds\Vector;
 use EdmondsCommerce\Generic\Collections\VectorGeneric;
-
+/**
+* @SuppressWarnings(PHPMD.TooManyPublicMethods)
+*/
 final class VectorBool extends VectorGeneric
 {
     /**
@@ -79,6 +81,7 @@ final class VectorBool extends VectorGeneric
      * @param int $index
      *
      * @return bool
+     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
     public function get(int $index): bool
     {

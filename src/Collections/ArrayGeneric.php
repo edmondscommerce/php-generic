@@ -4,6 +4,7 @@ namespace EdmondsCommerce\Generic\Collections;
 
 /**
  * @author Damian Glinkowski <damianglinkowski@gmail.com>
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 abstract class ArrayGeneric implements \ArrayAccess, \Iterator, \Countable, \Serializable
 {

@@ -7,7 +7,9 @@ namespace EdmondsCommerce\Generic\Tests\Example\Collections;
 
 use Ds\Vector;
 use EdmondsCommerce\Generic\Collections\VectorGeneric;
-
+/**
+* @SuppressWarnings(PHPMD.TooManyPublicMethods)
+*/
 final class VectorFloat extends VectorGeneric
 {
     /**
