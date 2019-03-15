@@ -19,7 +19,7 @@ echo "gitBranch is $gitBranch"
 git checkout $gitBranch
 cd $projectRootPath
 
-apt-get install php-ds
+pecl install ds
 
 composer install
 git checkout HEAD composer.lock
