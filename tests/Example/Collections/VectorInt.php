@@ -51,7 +51,7 @@ final class VectorInt extends VectorGeneric
      * @return VectorInt     */
     public function filter(callable $callback): VectorInt
     {
-        return new self($this->data->filter($callback)->toArray());
+        return new self(...$this->data->filter($callback)->toArray());
     }
 
     /**
@@ -141,7 +141,9 @@ final class VectorInt extends VectorGeneric
     public function offsetSet($offset, $value): void
     {
                     if (false === is_int($value)) {
-                throw new \InvalidArgumentException('$value must be of the type: int');
+                throw new \InvalidArgumentException(
+                    '$value is ' . $value.' but must be of the type: int'
+                );
             }
                     is_null($offset) ?
             $this->data->push($value) :

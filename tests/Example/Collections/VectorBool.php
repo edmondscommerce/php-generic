@@ -51,7 +51,7 @@ final class VectorBool extends VectorGeneric
      * @return VectorBool     */
     public function filter(callable $callback): VectorBool
     {
-        return new self($this->data->filter($callback)->toArray());
+        return new self(...$this->data->filter($callback)->toArray());
     }
 
     /**
@@ -141,7 +141,9 @@ final class VectorBool extends VectorGeneric
     public function offsetSet($offset, $value): void
     {
                     if (false === is_bool($value)) {
-                throw new \InvalidArgumentException('$value must be of the type: bool');
+                throw new \InvalidArgumentException(
+                    '$value is ' . $value.' but must be of the type: bool'
+                );
             }
                     is_null($offset) ?
             $this->data->push($value) :

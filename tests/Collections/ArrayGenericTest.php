@@ -61,7 +61,7 @@ final class ArrayGenericTest extends TestCase
     public function testCannotAddNewElementWithNotNumberValue(): void
     {
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Value string is not instance of int');
+        $this->expectExceptionMessage('$value is string but must be of the type: int');
 
         $array = new ArrayInt(4, 5);
 

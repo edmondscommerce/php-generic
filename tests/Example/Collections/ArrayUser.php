@@ -45,7 +45,9 @@ final class ArrayUser extends ArrayGeneric
     public function offsetSet($offset, $value): void
     {
         if (false === ($value instanceof User)) {
-            throw new \InvalidArgumentException('$value must be instance of User');
+            throw new \InvalidArgumentException(
+                '$value is ' . get_class($value) . ' but must be instance of User'
+            );
         }
             null === $offset ?
             $this->data[] = $value :

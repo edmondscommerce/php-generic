@@ -51,7 +51,7 @@ final class VectorException extends VectorGeneric
      * @return VectorException     */
     public function filter(callable $callback): VectorException
     {
-        return new self($this->data->filter($callback)->toArray());
+        return new self(...$this->data->filter($callback)->toArray());
     }
 
     /**
@@ -141,7 +141,9 @@ final class VectorException extends VectorGeneric
     public function offsetSet($offset, $value): void
     {
                     if (false === ($value instanceof \Exception)) {
-                throw new \InvalidArgumentException('$value must be instance of \Exception');
+                throw new \InvalidArgumentException(
+                    '$value is ' . get_class($value) . ' but must be instance of \Exception'
+                );
             }
                     is_null($offset) ?
             $this->data->push($value) :

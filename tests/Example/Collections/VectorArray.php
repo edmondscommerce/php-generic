@@ -51,7 +51,7 @@ final class VectorArray extends VectorGeneric
      * @return VectorArray     */
     public function filter(callable $callback): VectorArray
     {
-        return new self($this->data->filter($callback)->toArray());
+        return new self(...$this->data->filter($callback)->toArray());
     }
 
     /**
@@ -141,7 +141,9 @@ final class VectorArray extends VectorGeneric
     public function offsetSet($offset, $value): void
     {
                     if (false === is_array($value)) {
-                throw new \InvalidArgumentException('$value must be of the type: array');
+                throw new \InvalidArgumentException(
+                    '$value is ' . $value.' but must be of the type: array'
+                );
             }
                     is_null($offset) ?
             $this->data->push($value) :

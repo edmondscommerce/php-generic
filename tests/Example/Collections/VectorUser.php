@@ -52,7 +52,7 @@ final class VectorUser extends VectorGeneric
      * @return VectorUser     */
     public function filter(callable $callback): VectorUser
     {
-        return new self($this->data->filter($callback)->toArray());
+        return new self(...$this->data->filter($callback)->toArray());
     }
 
     /**
@@ -142,7 +142,9 @@ final class VectorUser extends VectorGeneric
     public function offsetSet($offset, $value): void
     {
                     if (false === ($value instanceof User)) {
-                throw new \InvalidArgumentException('$value must be instance of User');
+                throw new \InvalidArgumentException(
+                    '$value is ' . get_class($value) . ' but must be instance of User'
+                );
             }
                     is_null($offset) ?
             $this->data->push($value) :

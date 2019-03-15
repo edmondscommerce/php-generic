@@ -51,7 +51,9 @@ final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
     case 'array':
         ?>
         if (false === is_<?= $genericCollection->getType()?>($value)) {
-            throw new \InvalidArgumentException('$value must be of the type: <?= $genericCollection->getType() ?>');
+            throw new \InvalidArgumentException(
+                '$value is ' . $value.' but must be of the type: <?= $genericCollection->getType() ?>'
+            );
         }
         <?php
         break;
@@ -59,7 +61,9 @@ final class <?= $genericCollection->getClass() ?> extends ArrayGeneric
     default:
         ?>
         if (false === ($value instanceof <?= $genericCollection->getType() ?>)) {
-            throw new \InvalidArgumentException('$value must be instance of <?= $genericCollection->getType() ?>');
+            throw new \InvalidArgumentException(
+                '$value is ' . get_class($value) . ' but must be instance of <?= $genericCollection->getType() ?>'
+            );
         }
     <?php
 }

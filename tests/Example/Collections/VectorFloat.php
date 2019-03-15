@@ -51,7 +51,7 @@ final class VectorFloat extends VectorGeneric
      * @return VectorFloat     */
     public function filter(callable $callback): VectorFloat
     {
-        return new self($this->data->filter($callback)->toArray());
+        return new self(...$this->data->filter($callback)->toArray());
     }
 
     /**
@@ -141,7 +141,9 @@ final class VectorFloat extends VectorGeneric
     public function offsetSet($offset, $value): void
     {
                     if (false === is_float($value)) {
-                throw new \InvalidArgumentException('$value must be of the type: float');
+                throw new \InvalidArgumentException(
+                    '$value is ' . $value.' but must be of the type: float'
+                );
             }
                     is_null($offset) ?
             $this->data->push($value) :

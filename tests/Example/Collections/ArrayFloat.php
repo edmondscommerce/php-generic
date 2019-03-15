@@ -44,7 +44,9 @@ final class ArrayFloat extends ArrayGeneric
     public function offsetSet($offset, $value): void
     {
         if (false === is_float($value)) {
-            throw new \InvalidArgumentException('$value must be of the type: float');
+            throw new \InvalidArgumentException(
+                '$value is ' . $value.' but must be of the type: float'
+            );
         }
                 null === $offset ?
             $this->data[] = $value :

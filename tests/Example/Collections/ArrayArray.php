@@ -44,7 +44,9 @@ final class ArrayArray extends ArrayGeneric
     public function offsetSet($offset, $value): void
     {
         if (false === is_array($value)) {
-            throw new \InvalidArgumentException('$value must be of the type: array');
+            throw new \InvalidArgumentException(
+                '$value is ' . $value.' but must be of the type: array'
+            );
         }
                 null === $offset ?
             $this->data[] = $value :

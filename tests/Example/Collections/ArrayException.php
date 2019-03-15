@@ -44,7 +44,9 @@ final class ArrayException extends ArrayGeneric
     public function offsetSet($offset, $value): void
     {
         if (false === ($value instanceof \Exception)) {
-            throw new \InvalidArgumentException('$value must be instance of \Exception');
+            throw new \InvalidArgumentException(
+                '$value is ' . get_class($value) . ' but must be instance of \Exception'
+            );
         }
             null === $offset ?
             $this->data[] = $value :

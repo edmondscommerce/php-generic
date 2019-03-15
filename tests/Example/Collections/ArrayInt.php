@@ -44,7 +44,9 @@ final class ArrayInt extends ArrayGeneric
     public function offsetSet($offset, $value): void
     {
         if (false === is_int($value)) {
-            throw new \InvalidArgumentException('$value must be of the type: int');
+            throw new \InvalidArgumentException(
+                '$value is ' . $value.' but must be of the type: int'
+            );
         }
                 null === $offset ?
             $this->data[] = $value :
