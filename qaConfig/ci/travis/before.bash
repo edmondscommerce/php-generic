@@ -18,6 +18,9 @@ gitBranch=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then echo $TRAVIS_BRANCH; 
 echo "gitBranch is $gitBranch"
 git checkout $gitBranch
 cd $projectRootPath
+
+apt-get install php-ds
+
 composer install
 git checkout HEAD composer.lock
 
