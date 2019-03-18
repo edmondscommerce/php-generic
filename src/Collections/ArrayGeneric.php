@@ -119,8 +119,9 @@ abstract class ArrayGeneric implements \ArrayAccess, \Iterator, \Countable, \Ser
      */
     public function filter(callable $filter)
     {
-        $this->data = \array_filter($this->data, $filter);
+        $cloned       = clone $this;
+        $cloned->data = \array_filter($cloned->data, $filter);
 
-        return $this;
+        return $cloned;
     }
 }
