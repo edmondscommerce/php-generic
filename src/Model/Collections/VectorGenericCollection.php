@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace EdmondsCommerce\Generic\Model\Collections;
 
 use Ds\Vector;
@@ -55,9 +56,7 @@ final class VectorGenericCollection extends VectorGeneric
     {
         $data = $this->data->filter($callback);
 
-        return is_null($data) ?
-            null :
-            new VectorGenericCollection(...$data->toArray());
+        return new VectorGenericCollection(...$data->toArray());
     }
 
     /**

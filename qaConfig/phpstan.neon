@@ -4,7 +4,7 @@ includes:
     - ../vendor/phpstan/phpstan-phpunit/rules.neon
 parameters:
     ignoreErrors:
-        - '#HumbugBox#'
+        - '#unknown class.+?HumbugBox.+?Vector#'
+        - '#Vector.+?offset.+?\(\) should be contravariant#'
+        - '#Cannot .+? offset int .+? Ds\\Vector#'
         - '#Variable method call#'
-        - '#Cannot (access|assign) offset#'
-        - '#contravariant with parameter \$offset#'

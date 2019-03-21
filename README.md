@@ -6,6 +6,18 @@ This is now becoming more of a pure wrapper for php-ds to allow generating of ty
 
 Currently there is only Vector, though more might be added as we need them
 
+## PHPStan
+
+Currently seeing some issues with PHPStan, suggest the following ignore errors:
+
+```
+parameters:
+    ignoreErrors:
+        - '#unknown class.+?HumbugBox.+?Vector#'
+        - '#Vector.+?offset.+?\(\) should be contravariant#'
+        - '#Cannot .+? offset int .+? Ds\\Vector#'
+```
+
 -------
 
 Original README
