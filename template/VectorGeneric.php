@@ -149,27 +149,23 @@ final class <?= $genericCollection->getClass() ?> extends VectorGeneric
             case 'string':
             case 'float':
             case 'bool':
-            case 'array':
-                ?>
-            if (false === is_<?= $genericCollection->getType()?>($value)) {
-                throw new \InvalidArgumentException(
-                    '$value is ' . $value.' but must be of the type: <?= $genericCollection->getType() ?>'
-                );
-            }
-            <?php
+            case 'array': ?>if (false === is_<?= $genericCollection->getType()?>($value)) {
+            throw new \InvalidArgumentException(
+                '$value is ' . $value.' but must be of the type: <?= $genericCollection->getType() ?>'
+            );
+        }
+        <?php
                 break;
 
             default:
-                ?>
-            if (false === ($value instanceof <?= $genericCollection->getType() ?>)) {
-                throw new \InvalidArgumentException(
-                    '$value is ' . get_class($value) . ' but must be instance of <?= $genericCollection->getType() ?>'
-                );
-            }
-            <?php
+                ?>if (false === ($value instanceof <?= $genericCollection->getType() ?>)) {
+            throw new \InvalidArgumentException(
+                '$value is ' . get_class($value) . ' but must be instance of <?= $genericCollection->getType() ?>'
+            );
         }
-        ?>
-        is_null($offset) ?
+        <?php
+        }
+        ?>is_null($offset) ?
             $this->data->push($value) :
             $this->data->set($offset, $value);
     }

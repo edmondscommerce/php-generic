@@ -144,10 +144,10 @@ final class VectorInt extends VectorGeneric
     {
         if (false === is_int($value)) {
             throw new \InvalidArgumentException(
-                '$value is ' . $value . ' but must be of the type: int'
+                '$value is ' . $value.' but must be of the type: int'
             );
         }
-                    is_null($offset) ?
+        is_null($offset) ?
             $this->data->push($value) :
             $this->data->set($offset, $value);
     }

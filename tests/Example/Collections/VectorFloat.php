@@ -144,10 +144,10 @@ final class VectorFloat extends VectorGeneric
     {
         if (false === is_float($value)) {
             throw new \InvalidArgumentException(
-                '$value is ' . $value . ' but must be of the type: float'
+                '$value is ' . $value.' but must be of the type: float'
             );
         }
-                    is_null($offset) ?
+        is_null($offset) ?
             $this->data->push($value) :
             $this->data->set($offset, $value);
     }

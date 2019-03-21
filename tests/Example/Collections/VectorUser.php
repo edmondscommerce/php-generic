@@ -148,7 +148,7 @@ final class VectorUser extends VectorGeneric
                 '$value is ' . get_class($value) . ' but must be instance of User'
             );
         }
-                    is_null($offset) ?
+        is_null($offset) ?
             $this->data->push($value) :
             $this->data->set($offset, $value);
     }
