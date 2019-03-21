@@ -8,5 +8,4 @@ namespace EdmondsCommerce\Generic\Collections;
 interface GenericType
 {
     public const VECTOR_TYPE = 'Vector';
-    public const ARRAY_TYPE = 'Array';
 }

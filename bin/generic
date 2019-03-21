@@ -25,7 +25,6 @@ $genericCollectionRepository = new JsonGenericCollectionRepository($appPath . '/
 $collectionGenerator = new CollectionGenerator($collectionRender, $collectionWriter, $genericCollectionRepository);
 
 $app = new Application();
-$app->add(new ArrayGeneratorCommand($collectionGenerator));
 $app->add(new VectorGeneratorCommand($collectionGenerator));
 $app->add(new RegeneratCollectionsCommand($collectionGenerator));
 

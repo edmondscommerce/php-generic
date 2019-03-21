@@ -64,26 +64,14 @@ class CollectionGeneratorTest extends TestCase
         array_map('unlink', glob('*.php'));
         foreach ($this->primitiveType as $type) {
             $genericCollection = new GenericCollection($type, $this->namespace);
-            $this->collectionGenerator->generate($genericCollection, GenericType::ARRAY_TYPE, false);
-
-            $genericCollection = new GenericCollection($type, $this->namespace);
             $this->collectionGenerator->generate($genericCollection, GenericType::VECTOR_TYPE, false);
         }
 
         foreach ($this->complexType as $type) {
             $genericCollection = new GenericCollection($type, $this->namespace);
-            $this->collectionGenerator->generate($genericCollection, GenericType::ARRAY_TYPE, false);
-
-            $genericCollection = new GenericCollection($type, $this->namespace);
             $this->collectionGenerator->generate($genericCollection, GenericType::VECTOR_TYPE, false);
         }
         $expected = [
-            'ArrayArray.php',
-            'ArrayBool.php',
-            'ArrayException.php',
-            'ArrayFloat.php',
-            'ArrayInt.php',
-            'ArrayUser.php',
             'VectorArray.php',
             'VectorBool.php',
             'VectorException.php',

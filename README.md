@@ -2,7 +2,13 @@
 
 Please see original: https://github.com/d0niek/php-generic
 
+This is now becoming more of a pure wrapper for php-ds to allow generating of typed implementations of the php-ds data structures.
+
+Currently there is only Vector, though more might be added as we need them
+
 -------
+
+Original README
 
 # Prepare for future with php-generic
 
