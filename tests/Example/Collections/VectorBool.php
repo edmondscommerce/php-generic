@@ -145,7 +145,7 @@ final class VectorBool extends VectorGeneric
     {
         if (false === is_bool($value)) {
             throw new \InvalidArgumentException(
-                '$value is ' . $value.' but must be of the type: bool'
+                '$value is ' . $value . ' but must be of the type: bool'
             );
         }
         is_null($offset) ?

@@ -144,7 +144,7 @@ final class VectorArray extends VectorGeneric
     {
         if (false === is_array($value)) {
             throw new \InvalidArgumentException(
-                '$value is ' . $value.' but must be of the type: array'
+                '$value is ' . $value . ' but must be of the type: array'
             );
         }
         is_null($offset) ?
