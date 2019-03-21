@@ -8,4 +8,3 @@ parameters:
         - '#Variable method call#'
         - '#Cannot (access|assign) offset#'
         - '#contravariant with parameter \$offset#'
-        - '#assertFalse\(\) with true will always evaluate to false#'

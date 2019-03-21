@@ -19,7 +19,7 @@ class CollectionGenerator implements CollectionGeneratorInterface
     /**
      * @var string[]
      */
-    private const GENERIC_TYPE = [GenericType::ARRAY_TYPE, GenericType::VECTOR_TYPE];
+    private const GENERIC_TYPE = [GenericType::VECTOR_TYPE];
 
     /**
      * @var \EdmondsCommerce\Generic\Service\CollectionRenderInterface

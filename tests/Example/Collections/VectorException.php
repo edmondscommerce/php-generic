@@ -142,11 +142,11 @@ final class VectorException extends VectorGeneric
      */
     public function offsetSet($offset, $value): void
     {
-        if (false === ($value instanceof \Exception)) {
-            throw new \InvalidArgumentException(
-                '$value is ' . get_class($value) . ' but must be instance of \Exception'
-            );
-        }
+                    if (false === ($value instanceof \Exception)) {
+                throw new \InvalidArgumentException(
+                    '$value is ' . get_class($value) . ' but must be instance of \Exception'
+                );
+            }
                     is_null($offset) ?
             $this->data->push($value) :
             $this->data->set($offset, $value);
