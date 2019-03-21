@@ -143,11 +143,11 @@ final class VectorUser extends VectorGeneric
      */
     public function offsetSet($offset, $value): void
     {
-                    if (false === ($value instanceof User)) {
-                throw new \InvalidArgumentException(
-                    '$value is ' . get_class($value) . ' but must be instance of User'
-                );
-            }
+        if (false === ($value instanceof User)) {
+            throw new \InvalidArgumentException(
+                '$value is ' . get_class($value) . ' but must be instance of User'
+            );
+        }
                     is_null($offset) ?
             $this->data->push($value) :
             $this->data->set($offset, $value);
