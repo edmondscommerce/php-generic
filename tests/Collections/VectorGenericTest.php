@@ -413,4 +413,14 @@ final class VectorGenericTest extends TestCase
         self::assertCount(4, $vector);
         self::assertSame(4, $vector->first());
     }
+
+    public function testItCanBeSerializedAndUnSerialized(): void
+    {
+        $vector = new VectorInt(1, 2, 3, 4);
+        $serialized = serialize($vector);
+        $unSerialized = unserialize($serialized);
+        $reSerialized = serialize($unSerialized);
+
+        self::assertSame($serialized, $reSerialized);
+    }
 }
