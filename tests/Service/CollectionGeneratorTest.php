@@ -61,7 +61,7 @@ class CollectionGeneratorTest extends TestCase
     public function itCanGenerateCollections(): void
     {
         chdir(__DIR__ . '/../Example/Collections/');
-        array_map('unlink', glob('*.php'));
+        array_map('unlink', \ts\glob('*.php'));
         foreach ($this->primitiveType as $type) {
             $genericCollection = new GenericCollection($type, $this->namespace);
             $this->collectionGenerator->generate($genericCollection, GenericType::VECTOR_TYPE, false);
