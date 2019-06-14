@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "188d782a9f6412cf4bb0e109128c2d61",
+    "content-hash": "a68686081e1746dcbf8a1d0a644244af",
     "packages": [
         {
             "name": "edmondscommerce/typesafe-functions",

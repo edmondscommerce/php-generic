@@ -26,11 +26,11 @@
     "issues": "https://github.com/edmondscommerce/php-generic/issues"
   },
   "require": {
-    "php": "^7.1",
+    "php": "^7.2",
     "symfony/console": "^3.2|^4.2",
     "ext-ds": "*",
     "ext-json": "*",
-    "edmondscommerce/typesafe-functions": "^0.1.4 | ^0.2",
+    "edmondscommerce/typesafe-functions": "^0.2",
     "php-ds/php-ds": "^1.2"
   },
   "require-dev": {
